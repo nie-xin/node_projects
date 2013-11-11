@@ -9,7 +9,13 @@ function BinaryHeap(scoreFunction) {
 BinaryHeap.prototype = {
 	push: function(element) {
 		// add new element to the end of the array
-		this.content.push(element);
+		// a little modification: let user pass a flag indicating maximun or minimun heap
+		// this.content.push(element);
+		if (this.options.max) {
+			this.content.push(-element);
+		} else {
+			this.content.push(element);
+		}
 		// allow it to bubble up
 		this.bubbleUp(this.content.length - 1);
 	},
@@ -106,6 +112,14 @@ BinaryHeap.prototype = {
 			this.content[swap] = element;
 			n = swap;
 		}
+	},
+
+	// new function added 
+	peek: function() {
+		if (this.options.max)
+			return -this.content[0];
+		else
+			return this.content[0];
 	}
 };
 
